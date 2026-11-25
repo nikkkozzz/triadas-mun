@@ -1,0 +1,6 @@
+{
+  "name": "Tríadas para Muñones — Curso Interactivo de Guitarra",
+  "description": "Curso interactivo completo paso a paso basado en Tríadas para Muñones (y CAGED): desbloquea el diapasón con diagramas SVG, tablaturas con audio y metrónomo integrado.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
