@@ -5,6 +5,8 @@ import { CourseSidebar } from './components/CourseSidebar';
 import { LessonRenderer } from './components/LessonRenderer';
 import { MetronomeBar } from './components/MetronomeBar';
 import { PracticeStudioModal, StudioTab } from './components/studio/PracticeStudioModal';
+import { PWAInstallButton } from './components/PWAInstallButton';
+import { OfflineIndicator } from './components/OfflineIndicator';
 import { guitarAudio } from './utils/guitarAudio';
 
 const STORAGE_COMPLETED_KEY = 'triadas_munones_completed_v1';
@@ -60,6 +62,10 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+      themeMeta.setAttribute('content', isDark ? '#000000' : '#ffffff');
+    }
     try {
       window.localStorage.setItem(STORAGE_THEME_KEY, isDark ? 'dark' : 'light');
     } catch {
@@ -224,8 +230,10 @@ export default function App() {
             </div>
           </div>
 
-          {/* Right: Estudio (Looper/Afinador/Oído) + Metrónomo + Modo Atril + Theme */}
+          {/* Right: Install PWA + Estudio + Metrónomo + Modo Atril + Theme */}
           <div className="flex items-center gap-2 shrink-0">
+            <PWAInstallButton />
+
             <button
               type="button"
               onClick={() => openStudio('looper')}
@@ -350,6 +358,9 @@ export default function App() {
         initialTab={studioInitialTab}
         globalBpm={bpm}
       />
+
+      {/* Non-intrusive Offline Status Toast */}
+      <OfflineIndicator />
     </div>
   );
 }
